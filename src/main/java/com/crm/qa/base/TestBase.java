@@ -33,6 +33,7 @@ public class TestBase {
 		if(browserName.equals("chrome")){
 			ChromeOptions co = new ChromeOptions();
 			co.addArguments("--start-maxmized");
+			    
 			System.setProperty("WebDriver.chrome.driver", "D:\\InstalledSoftwares\\LatestSelenium\\chromedriver");
 			driver = new ChromeDriver(co);
 		}

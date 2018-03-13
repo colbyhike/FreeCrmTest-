@@ -1,23 +1,26 @@
 package com.crm.qa.pages;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import com.crm.qa.base.Constant;
+import com.crm.qa.base.HomePageConstants;
 import com.crm.qa.base.TestBase;
 
-public class HomePage extends TestBase {
+public class HomePage extends TestBase implements Constant, HomePageConstants {
 	
 	@FindBy(xpath ="//td[contains(text(),'User: Anil kashyap')]")
 	WebElement userLabel;
 	
-	@FindBy(xpath="//div[@id = 'navmenu']//a[ contains(text(),'Calendar') ]")//or xpath ="//a[@title='Calendar']"
+	@FindBy(xpath=CALENDAR_LINK)//or xpath ="//a[@title='Calendar']"
 	WebElement calendarLink;
 	
 	@FindBy(xpath ="//div[@id = 'navmenu']//a[ contains(text(),'Companies') ]")//or xpath ="//a[@title='Companies']"
 	WebElement companiesLink;
 	
-	@FindBy(xpath ="//a[contains(text(), 'Contacts')]")
+	@FindBy(xpath ="//a[@title='Deals']")
 	WebElement contactsLink;
 	
 	@FindBy(xpath ="//a[contains(text(), 'Deals')]")
@@ -52,6 +55,12 @@ public class HomePage extends TestBase {
 	
 	@FindBy(xpath="//a[@title ='Reports']")
 	WebElement reportsLink;
+	
+	@FindBy(xpath= NEW_DEAL)
+	WebElement newDeals;
+	
+	@FindBy(xpath = "//a[contains(text(),'Full Search Form')]")
+	WebElement fullSearchFormLink;
 	
 	//Initializing the page object
 	public HomePage(){
@@ -130,6 +139,17 @@ public class HomePage extends TestBase {
 	public TextAndSmsPage clickOnTextAndSmsLink(){
 		textAndsmsLink.click();
 		return new TextAndSmsPage();
+		
+	}
+	
+	public boolean verifyfullSearchFormLink() throws InterruptedException{
+		Actions action = new Actions(driver);
+		//Thread.sleep(5000);
+		action.moveToElement(dealsLink).moveToElement(fullSearchFormLink).build().perform();
+		
+		fullSearchFormLink.isSelected();
+		//return new DealPage();
+		return true;
 		
 	}
 }
